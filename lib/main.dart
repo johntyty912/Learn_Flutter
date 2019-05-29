@@ -123,6 +123,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             RandomWordsWidget(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CupertinoButton(
+                child: Text('debug Dump App'),
+                color: Colors.blue,
+                onPressed: () {
+                  debugDumpApp();
+                },
+              ),
+            ),
           ],
         ),
       ),
