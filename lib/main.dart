@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,6 +21,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
+      routes: {
+        "new_page": (context) => NewRoute(),
+        "echo_page": (context) => EchoRoute(),
+      },
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -88,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // how it positions its children. Here we use mainAxisAlignment to
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
-          // horizontal).
+          // horizontal).routeName
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
@@ -97,6 +102,21 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.display1,
+            ),
+            CupertinoButton(
+              child: Text('open new route'),
+              color: Colors.blue,
+              onPressed: () {
+                Navigator.pushNamed(context, "new_page");
+              },
+            ),
+            Divider(),
+            CupertinoButton(
+              child: Text('open echo route'),
+              color: Colors.blue,
+              onPressed: () {
+                Navigator.pushNamed(context, "echo_page", arguments: _counter);
+              },
             ),
           ],
         ),
@@ -107,6 +127,35 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
         backgroundColor: Colors.teal,
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class NewRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("New route"),
+      ),
+      body: Center(
+        child: Text("This is new route"),
+      ),
+    );
+  }
+}
+
+class EchoRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var _args = ModalRoute.of(context).settings.arguments;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Echo route"),
+      ),
+      body: Center(
+        child: Text("You clicked $_args times"),
+      ),
     );
   }
 }
