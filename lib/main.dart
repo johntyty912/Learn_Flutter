@@ -117,7 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text('open echo route'),
                 color: Colors.blue,
                 onPressed: () {
-                  Navigator.pushNamed(context, "echo_page", arguments: _counter);
+                  Navigator.pushNamed(context, "echo_page",
+                      arguments: _counter);
                 },
               ),
             ),
@@ -142,8 +143,16 @@ class NewRoute extends StatelessWidget {
       appBar: AppBar(
         title: Text("New route"),
       ),
-      body: Center(
-        child: Text("This is new route"),
+      body: Container(
+        child: Center(
+          child: Text("This is new route",
+            style: TextStyle(color: Colors.white, fontSize: 40.0),
+          ),
+        ),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("graphics/background.jpg"),
+                fit: BoxFit.cover)),
       ),
     );
   }
@@ -173,5 +182,4 @@ class RandomWordsWidget extends StatelessWidget {
       child: new Text(wordPair.asPascalCase),
     );
   }
-  
 }
