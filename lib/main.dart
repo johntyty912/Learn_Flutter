@@ -25,11 +25,13 @@ class MyApp extends StatelessWidget {
       routes: {
         "new_page": (context) => NewRoute(),
         "echo_page": (context) => EchoRoute(),
+        "cupertino_page": (context) => CupertinoTestRoute(),
       },
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -133,6 +135,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CupertinoButton(
+                child: Text('open cupertino route'),
+                color: Colors.blue,
+                onPressed: () {
+                  Navigator.pushNamed(context, "cupertino_page",
+                      arguments: _counter);
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -155,7 +168,8 @@ class NewRoute extends StatelessWidget {
       ),
       body: Container(
         child: Center(
-          child: Text("This is new route",
+          child: Text(
+            "This is new route",
             style: TextStyle(color: Colors.white, fontSize: 40.0),
           ),
         ),
@@ -190,6 +204,24 @@ class RandomWordsWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: new Text(wordPair.asPascalCase),
+    );
+  }
+}
+
+class CupertinoTestRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text("Cupertino Demo"),
+      ),
+      child: Center(
+        child: CupertinoButton(
+          color: CupertinoColors.activeBlue,
+          child: Text("Press"),
+          onPressed: () {},
+        ),
+      ),
     );
   }
 }
